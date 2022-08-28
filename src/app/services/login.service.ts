@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
   generateToken(credentials:any){
-    return this.http.post(`${this.base_url}/token`,credentials)
+    return this.http.post(this.base_url+"/token",credentials)
   }
 
   getToken(){
@@ -25,7 +25,7 @@ export class LoginService {
 
   isLoggedIn(){
     let token = localStorage.getItem("token")
-    if(token==undefined || token==null || token===''){
+    if(token==undefined || token==null || token==''){
       return false;
     }else{
       return true;
@@ -36,4 +36,5 @@ export class LoginService {
     localStorage.removeItem("token")
     return true;
   }
+
 }

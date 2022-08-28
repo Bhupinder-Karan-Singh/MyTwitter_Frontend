@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
-    <span><a mat-icon-button routerLink="/">MyTwitter</a></span>
+    <span><a mat-icon-button (click)="indexPage()">MyTwitter</a></span>
     <span class="example-spacer"></span>
-    <span><a mat-icon-button routerLink="/login">Login</a></span>
+    <span><a *ngIf="!loggedIn" mat-icon-button (click)="loginForm()">Login</a></span>
+    <span><a *ngIf="loggedIn"  mat-icon-button style="margin-right:100px;"><i>Welcome {{user.name}},</i></a></span>
+    <span><a *ngIf="loggedIn"  mat-icon-button (click)="logoutUser()">Logout</a></span>
 </mat-toolbar>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
     password:''
   }
 
-  constructor(private loginService:LoginService) { }
+
+  constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -24,9 +26,13 @@ export class LoginComponent implements OnInit {
       this.loginService.generateToken(this.credentials).subscribe(
         (response:any)=>{
         console.log(response.token);
+        this.loginService.isLoggedIn();
         this.loginService.loginUser(response.token);
+        this.router.navigate(['/dashboard']);
+        location.reload();
       },
       error=>{
+       console.log("Server error");
        console.log(error);
       })
     }else{

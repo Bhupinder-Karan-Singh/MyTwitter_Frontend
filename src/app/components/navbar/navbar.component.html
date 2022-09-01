@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
     <span><a mat-icon-button (click)="indexPage()">MyTwitter</a></span>
     <span class="example-spacer"></span>
-    <span><a *ngIf="!loggedIn" mat-icon-button (click)="loginForm()">Login</a></span>
-    <span><a *ngIf="loggedIn"  mat-icon-button style="margin-right:100px;"><i>Welcome {{user.name}},</i></a></span>
-    <span><a *ngIf="loggedIn"  mat-icon-button (click)="logoutUser()">Logout</a></span>
+    <span><a *ngIf="!loggedIn" mat-icon-button style="margin-right:20px;" (click)="loginForm()">Login</a></span>
+    <span><a *ngIf="!loggedIn" mat-icon-button (click)="signUpForm()">Signup</a></span>
+    <span><a *ngIf="loggedIn"  mat-icon-button ><i>Welcome {{user.firstname}},</i></a></span>
+    <span><a *ngIf="loggedIn" style="margin-left:150px;"  mat-icon-button (click)="logoutUser()">Logout</a></span>
 </mat-toolbar>

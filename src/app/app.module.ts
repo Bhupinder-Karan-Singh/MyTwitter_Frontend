@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { SignupComponent } from './components/signup/signup.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     LoginComponent,
     HomeComponent,
     DashboardComponent,
+    SignupComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,14 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+    timeOut: 5000,
+    preventDuplicates: true,
+    positionClass: 'toast-top-right',
+    closeButton: true,
+    
+    })
   ],
   providers: [LoginService, AuthGuard, [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]

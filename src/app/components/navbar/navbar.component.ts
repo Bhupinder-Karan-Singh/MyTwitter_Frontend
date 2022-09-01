@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { delay, Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +14,19 @@ import { UserService } from 'src/app/services/user.service';
 export class NavbarComponent implements OnInit {
 
   public loggedIn=false;
-  user!:any;
+  user:any="";
 
-  constructor(private loginService:LoginService,private userService:UserService,private router:Router) { }
+  constructor(public loginService:LoginService,private userService:UserService,private router:Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
+    
     this.loggedIn = this.loginService.isLoggedIn()
 
     this.userService.getUser().subscribe(res=>{
         this.user = res;
-        console.log("user:",res);
       },error=>{
-      console.log(error);
+       console.log(error);
       });
       
       if(this.loggedIn){
@@ -32,10 +35,14 @@ export class NavbarComponent implements OnInit {
   }
   logoutUser(){
     this.loginService.logout()
-    location.reload();
+    this.toastr.success('Logged out','Message');
   }
+
   loginForm(){
     this.router.navigate(['/login']);
+  }
+  signUpForm(){
+    this.router.navigate(['/signup']);
   }
   indexPage(){
     this.router.navigate(['/']);

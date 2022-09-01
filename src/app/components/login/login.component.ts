@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,12 @@ export class LoginComponent implements OnInit {
   }
 
 
-  constructor(private loginService:LoginService,private router:Router) { }
+  constructor(private loginService:LoginService,private router:Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    if(this.loginService.isLoggedIn()){
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   onSubmit(){
@@ -25,7 +29,6 @@ export class LoginComponent implements OnInit {
       console.log("form submitted");
       this.loginService.generateToken(this.credentials).subscribe(
         (response:any)=>{
-        console.log(response.token);
         this.loginService.isLoggedIn();
         this.loginService.loginUser(response.token);
         this.router.navigate(['/dashboard']);
@@ -33,10 +36,11 @@ export class LoginComponent implements OnInit {
       },
       error=>{
        console.log("Server error");
+       this.toastr.error('Invalid credentials','Message');
        console.log(error);
       })
     }else{
-      console.log("form is empty");
+      this.toastr.error('Invalid inputs','Message');
     }
   }
 }

@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { delay, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  base_url="http://localhost:8080"
-
-  constructor(private http:HttpClient) { }
+  base_url="http://localhost:8080";
+  
+  constructor(private http:HttpClient,private toastr: ToastrService,private router:Router) { }
 
   generateToken(credentials:any){
     return this.http.post(this.base_url+"/token",credentials)
@@ -31,10 +34,12 @@ export class LoginService {
       return true;
     }
   }
-
+  
   logout(){
     localStorage.removeItem("token")
-    return true;
-  }
+    localStorage.clear();
+    this.router.navigate(['login'])
+    location.reload();
 
+  }
 }

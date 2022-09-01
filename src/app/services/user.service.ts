@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,16 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
 
-  base_url="http://localhost:8080"
+  base_url="http://localhost:8080";
+  headers!: any;
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,private loginservice:LoginService) { 
+      this.headers = {
+        'idToken' : localStorage.getItem('token')
+      }    
   }
 
   getUser(){
-    return this.http.get(this.base_url+"/getUsers")
+    return this.http.get(this.base_url+"/getUsers",{params: this.headers})
   }
 }

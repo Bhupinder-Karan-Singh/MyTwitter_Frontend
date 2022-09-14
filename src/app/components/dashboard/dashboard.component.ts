@@ -15,8 +15,7 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-      this.userService.getUser().subscribe(
-        res=>{
+      this.userService.getUser().subscribe(res=>{
           this.user = res;
         },
         error=>{

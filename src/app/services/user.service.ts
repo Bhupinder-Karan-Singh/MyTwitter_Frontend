@@ -20,4 +20,9 @@ export class UserService {
   getUser(){
     return this.http.get(this.base_url+"/getUsers",{params: this.headers})
   }
+  
+  getUsers(search:any){
+    console.log("search sent",search);
+    return this.http.get(this.base_url+"/search/"+search,{params: this.headers})
+  }
 }

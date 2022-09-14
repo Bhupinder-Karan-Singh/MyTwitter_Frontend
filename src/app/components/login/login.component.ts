@@ -29,14 +29,17 @@ export class LoginComponent implements OnInit {
       console.log("form submitted");
       this.loginService.generateToken(this.credentials).subscribe(
         (response:any)=>{
-        this.loginService.isLoggedIn();
-        this.loginService.loginUser(response.token);
-        this.router.navigate(['/dashboard']);
-        location.reload();
+          if(response){
+            this.loginService.isLoggedIn();
+            this.loginService.loginUser(response.token);
+            this.router.navigate(['/dashboard']);
+            location.reload();
+          }else if(!response){
+            this.toastr.error('Invalid credentials','Message');
+          }
       },
-      error=>{
-       console.log("Server error");
-       this.toastr.error('Invalid credentials','Message');
+      (error:any)=>{
+        this.toastr.error('Bad credentials or Internal Server Error','Message');
        console.log(error);
       })
     }else{

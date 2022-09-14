@@ -1,4 +1,8 @@
-<app-navbar></app-navbar>
-<router-outlet>
-</router-outlet>
-<app-footer></app-footer>
+<ngx-ui-loader text="Loading..." textColor="#ff4081" fgsColor="#ff4081" 
+pbColor="#ff4081" fgsType="three-strings" ></ngx-ui-loader>
+<div ngxUiLoaderBlurred>
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+</div>
+

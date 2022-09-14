@@ -37,9 +37,9 @@ export class SignupComponent implements OnInit {
              console.log(response);
              console.log("Registration successfull");
              this.router.navigate(['/login']);
-             this.toastr.success('Registration done !!! Please Login','Message',{timeOut: 5000,});
+             this.toastr.success('Registration done !!! Please Login','Message');
            },error=>{
-            this.toastr.error('Error occured','Message',{timeOut: 5000,});
+            this.toastr.error('Error occured','Message');
             console.log("Error occured in registration");
            });
         }

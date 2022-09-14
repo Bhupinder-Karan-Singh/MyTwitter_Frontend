@@ -19,6 +19,8 @@ import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignupComponent } from './components/signup/signup.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from "ngx-ui-loader";
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     DashboardComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +43,13 @@ import { FooterComponent } from './components/footer/footer.component';
     MatFormFieldModule,
     MatInputModule,
     HttpClientModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
     ToastrModule.forRoot({
     timeOut: 5000,
     preventDuplicates: true,
     positionClass: 'toast-top-right',
     closeButton: true,
-    
     })
   ],
   providers: [LoginService, AuthGuard, [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}]],

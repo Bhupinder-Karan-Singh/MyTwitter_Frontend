@@ -40,6 +40,5 @@ export class LoginService {
     localStorage.clear();
     this.router.navigate(['login'])
     location.reload();
-
   }
 }

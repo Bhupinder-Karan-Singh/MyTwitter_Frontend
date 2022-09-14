@@ -1,8 +1,12 @@
 <mat-toolbar color="primary">
-    <span><a mat-icon-button (click)="indexPage()">MyTwitter</a></span>
+    <span><a (click)="indexPage()" style="font-size:15px; margin-right:15px;">MyTwitter</a></span>
+    <span><a *ngIf="loggedIn"  style="font-size:15px; text-decoration: none; color:white;" [routerLink]="['search']">Search Friends</a></span>
+
     <span class="example-spacer"></span>
-    <span><a *ngIf="!loggedIn" mat-icon-button style="margin-right:20px;" (click)="loginForm()">Login</a></span>
-    <span><a *ngIf="!loggedIn" mat-icon-button (click)="signUpForm()">Signup</a></span>
-    <span><a *ngIf="loggedIn"  mat-icon-button ><i>Welcome {{user.firstname}},</i></a></span>
-    <span><a *ngIf="loggedIn" style="margin-left:150px;"  mat-icon-button (click)="logoutUser()">Logout</a></span>
+    <div class="float-right" style="padding-right:5px;" >
+       <span><a *ngIf="!loggedIn" mat-icon-button style="margin-right:15px;" (click)="loginForm()">Login</a></span>
+       <span><a *ngIf="!loggedIn" mat-icon-button (click)="signUpForm()">Signup</a></span>
+       <span><a *ngIf="loggedIn"  style="font-size:15px">Welcome {{user.firstname}},</a>&nbsp;&nbsp;</span>
+       <span><a *ngIf="loggedIn"  style="font-size:15px" (click)="logoutUser()" class="btn btn-light" mat-raised-button color="accent">Logout</a></span>
+    </div>
 </mat-toolbar>

@@ -25,6 +25,8 @@ export class NavbarComponent implements OnInit {
 
     this.userService.getUser().subscribe(res=>{
         this.user = res;
+        console.log(res);
+        console.log(this.user);
       },error=>{
        console.log(error);
       });
@@ -35,7 +37,6 @@ export class NavbarComponent implements OnInit {
   }
   logoutUser(){
     this.loginService.logout()
-    this.toastr.success('Logged out','Message');
   }
 
   loginForm(){

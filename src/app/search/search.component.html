@@ -1,0 +1,29 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt text-center">
+        <form>
+            <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Search Friends</mat-label>
+            <input autocomplete="off" 
+            [(ngModel)]="search"
+            name="username"
+            type="email" matInput
+            (keyup)="onKeypressEvent($event)"
+            />
+           </mat-form-field>
+        </form>
+        
+        <div class="container"  style="text-align:center; width: 80%;">  
+            <div class="alert alert-danger" *ngIf ="userList.length <= 0" style="margin-top:200px;">
+              <span>No user found.</span>
+            </div>
+            
+            <div *ngIf ="userList.length > 0">
+                <div class="row mt" *ngFor="let u of userList, index as i">
+                    <div class="col" class="float-left">{{i+1}}</div>
+                    <div class="col">{{u.firstname}}</div>
+                    <div class="col" class="float-right"><button mat-raised-button color="primary" (click)="addFriend(u.username)">Add Friend</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
